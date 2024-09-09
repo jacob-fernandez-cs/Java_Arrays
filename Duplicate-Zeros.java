@@ -1,20 +1,30 @@
 class Solution {
+
+    /**
+     * Duplicates each occurrence of zero in the array `arr` while maintaining the array's original size.
+     * When a zero is encountered, it is duplicated, shifting subsequent elements to the right.
+     * The function uses a queue to handle the shifting of elements while preserving the order.
+     *
+     * @param arr the input array of integers, where zeros will be duplicated in place.
+     *            The array's length remains unchanged after modification.
+     */
     public void duplicateZeros(int[] arr) {
-            
-            //[1,0,2,3,0,4,5,0]
+        // Initialize a queue to facilitate element shifting as we iterate through the array.
+        Queue<Integer> q = new LinkedList<>();
         
-    Queue<Integer> q = new LinkedList<>(); //create Queue to look ahead into array
-    
-    for(int i=0; i<arr.length; i++){ //keeping the orginal array size
-        q.add(arr[i]); // add the current index to the Queue
-        
-        if(arr[i] == 0) // if the current index is 0 w need to duplicate the zero, add an extra zero to the Queue
-            q.add(0); 
+        // Traverse the array while keeping its original length intact.
+        for (int i = 0; i < arr.length; i++) {
+            // Add the current element to the queue.
+            q.add(arr[i]);
+
+            // If the current element is zero, duplicate the zero by adding another zero to the queue.
+            if (arr[i] == 0) {
+                q.add(0);
+            }
             
-        arr[i] = q.remove(); // set the current index of the array to the first element of the q, the remove() returns the first element and then removes it from the q,
-            
-        //System.out.println(Arrays.toString(arr));
-          
+            // Remove the first element from the queue and assign it to the current position in the array.
+            arr[i] = q.remove();
+        }
     }
 }
-}
+
